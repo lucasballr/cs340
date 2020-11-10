@@ -33,38 +33,64 @@ Transactions may not be removed due to the ledger style.
 </p>
 
 <div class="container">
-  <div class="row">
-    <div class="col-sm">
-		<h3>Add Transaction</h3>
-		<form>
-		  <div class="form-group">
-			<label for="did">Dealership ID:</label>
-			<input type="text" class="form-control" id="did">
-		  </div>
-		  <div class="form-group">
-			<label for="eid">Employee ID:</label>
-			<input type="text" class="form-control" id="eid">
-		  </div>
-		  <div class="form-group">
-			<label for="tDate">Date:</label>
-			<input type="text" class="form-control" id="tDate">
-		  </div>
-		  <div class="form-group">
-			<label for="cid">Car ID:</label>
-			<input type="text" class="form-control" id="cid">
-		  </div>
-		  <div class="form-group">
-			<label for="customerId">Customer ID:</label>
-			<input type="text" class="form-control" id="customerId">
-		  </div>
-		  <button type="submit" class="btn btn-primary">Submit</button>
-		</form>
-    </div>
-    <div class="col-sm">
-      
-    </div>
-    <div class="col-sm">
-      
-    </div>
-  </div>
+	<div class="jumbotron">
+	  <div class="row">
+	    <div class="col-sm">
+			<h3>Add Transaction</h3>
+			<form>
+			  <div class="form-group">
+				<label for="did">Dealership ID:</label>
+				<input type="text" class="form-control" id="did">
+			  </div>
+			  <div class="form-group">
+				<label for="eid">Employee ID:</label>
+				<input type="text" class="form-control" id="eid">
+			  </div>
+			  <div class="form-group">
+				<label for="tDate">Date:</label>
+				<input type="text" class="form-control" id="tDate">
+			  </div>
+			  <div class="form-group">
+				<label for="cid">Car ID:</label>
+				<input type="text" class="form-control" id="cid">
+			  </div>
+			  <div class="form-group">
+				<label for="customerId">Customer ID:</label>
+				<input type="text" class="form-control" id="customerId">
+			  </div>
+			  <button type="submit" class="btn btn-primary">Submit</button>
+			</form>
+	    </div>
+	    <div class="col-lg-auto">
+				<h3>Transactions</h3>
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th scope="col">ID</th>
+							<th scope="col">Dealership</th>
+							<th scope="col">Employee</th>
+							<th scope="col">Car ID</th>
+							<th scope="col">Customer</th>
+							<th scope="col">Date</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th scope="row">1</th>
+							<td>Honda Corvallis</td>
+							<td>Sarah Johnson</td>
+							<td>1</td>
+							<td>Joe Mama</td>
+							<td>11/09/2020</td>
+							<td><button type="button" class="btn btn-secondary">Edit</button></td>
+							<td><button type="button" class="btn btn-danger">Delete</button></td>
+						</tr>
+					</tbody>
+				</table>
+	    </div>
+	    <div class="col-sm">
+
+	    </div>
+	  </div>
+	</div>
 </div>

@@ -30,30 +30,50 @@
 <br>
 
 <div class="container">
-  <div class="row">
-    <div class="col-sm">
-		<h3>Add Dealership</h3>
-		<form>
-		  <div class="form-group">
-			<label for="dName">Dealership Name:</label>
-			<input type="text" class="form-control" id="dName">
-		  </div>
-		  <div class="form-group">
-			<label for="dPhone">Dealership Phone Number:</label>
-			<input type="text" class="form-control" id="dPhone">
-		  </div>
-		  <div class="form-group">
-			<label for="did">Dealership ID:</label>
-			<input type="text" class="form-control" id="did">
-		  </div>
-		  <button type="submit" class="btn btn-primary">Submit</button>
-		</form>
-    </div>
-    <div class="col-sm">
-      
-    </div>
-    <div class="col-sm">
-      
-    </div>
-  </div>
+	<div class="jumbotron">
+	  <div class="row">
+	    <div class="col-sm">
+			<h3>Add Dealership</h3>
+			<form>
+			  <div class="form-group">
+				<label for="dName">Dealership Name:</label>
+				<input type="text" class="form-control" id="dName">
+			  </div>
+			  <div class="form-group">
+				<label for="dPhone">Dealership Phone Number:</label>
+				<input type="text" class="form-control" id="dPhone">
+			  </div>
+			  <div class="form-group">
+				<label for="did">Dealership ID:</label>
+				<input type="text" class="form-control" id="did">
+			  </div>
+			  <button type="submit" class="btn btn-primary">Submit</button>
+			</form>
+	    </div>
+	    <div class="col-lg-auto">
+				<h3>Cars</h3>
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th scope="col">ID</th>
+							<th scope="col">Name</th>
+							<th scope="col">Phone Number</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th scope="row">52096</th>
+							<td>Honda Corvallis</td>
+							<td>541-752-2150</td>
+							<td><button type="button" class="btn btn-secondary">Edit</button></td>
+							<td><button type="button" class="btn btn-danger">Delete</button></td>
+						</tr>
+					</tbody>
+				</table>
+	    </div>
+	    <div class="col-sm">
+
+	    </div>
+	  </div>
+	</div>
 </div>
