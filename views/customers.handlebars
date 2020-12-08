@@ -39,19 +39,19 @@ This is the customer page
 			<form>
 			  <div class="form-group">
 				<label for="did">Dealership ID:</label>
-				<input type="text" class="form-control" id="did">
+				<input type="text" class="form-control" name="dealership_ID">
 			  </div>
 			  <div class="form-group">
 				<label for="tid">Transaction ID:</label>
-				<input type="text" class="form-control" id="tid">
+				<input type="text" class="form-control" name="transaction_ID">
 			  </div>
 			  <div class="form-group">
 				<label for="fName">First Name:</label>
-				<input type="text" class="form-control" id="fName">
+				<input type="text" class="form-control" name="fName">
 			  </div>
 			  <div class="form-group">
 				<label for="lName">Last Name:</label>
-				<input type="text" class="form-control" id="lName">
+				<input type="text" class="form-control" name="lName">
 			  </div>
 			  <button type="submit" class="btn btn-primary">Submit</button>
 			</form>
@@ -64,20 +64,20 @@ This is the customer page
 							<th scope="col">ID</th>
 							<th scope="col">First Name</th>
 							<th scope="col">Last Name</th>
-							<th scope="col">Transaction ID</th>
-							<th scope="col">Dealership</th>
 						</tr>
 					</thead>
 					<tbody>
+						{{#each customers}}
 						<tr>
-							<th scope="row">1</th>
-							<td>Joe</td>
-							<td>Mama</td>
-							<td>4206969</td>
-							<td>Honda Corvallis</td>
+							<th scope="row">{{id}}</th>
+							<td>{{fName}}</td>
+							<td>{{lName}}</td>
 							<td><button type="button" class="btn btn-secondary">Edit</button></td>
-							<td><button type="button" class="btn btn-danger">Delete</button></td>
+							<div id="deleteButton">
+								<td><button type="button" class="btn btn-danger" id="{{id}}">Delete</button></td>
+							</div>
 						</tr>
+						{{/each}}
 					</tbody>
 				</table>
 			</div>
@@ -87,3 +87,13 @@ This is the customer page
 	  </div>
 	</div>
 </div>
+<script>
+var wrapper = document.getElementById('deleteButton');
+wrapper.addEventListener('click', (event) => {
+	var isButton = event.target.nodeName === 'BUTTON';
+	if (!isButton) {
+		return;
+	}
+	console.log(event.target.id);
+});
+</script>

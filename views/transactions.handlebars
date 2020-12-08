@@ -40,23 +40,23 @@ Transactions may not be removed due to the ledger style.
 			<form>
 			  <div class="form-group">
 				<label for="did">Dealership ID:</label>
-				<input type="text" class="form-control" id="did">
+				<input type="text" class="form-control" name="dealership_ID">
 			  </div>
 			  <div class="form-group">
 				<label for="eid">Employee ID:</label>
-				<input type="text" class="form-control" id="eid">
+				<input type="text" class="form-control" name="employee_ID">
 			  </div>
 			  <div class="form-group">
 				<label for="tDate">Date:</label>
-				<input type="text" class="form-control" id="tDate">
+				<input type="text" class="form-control" name="date">
 			  </div>
 			  <div class="form-group">
 				<label for="cid">Car ID:</label>
-				<input type="text" class="form-control" id="cid">
+				<input type="text" class="form-control" name="car_ID">
 			  </div>
 			  <div class="form-group">
 				<label for="customerId">Customer ID:</label>
-				<input type="text" class="form-control" id="customerId">
+				<input type="text" class="form-control" name="customer_ID">
 			  </div>
 			  <button type="submit" class="btn btn-primary">Submit</button>
 			</form>
@@ -68,23 +68,22 @@ Transactions may not be removed due to the ledger style.
 						<tr>
 							<th scope="col">ID</th>
 							<th scope="col">Dealership</th>
-							<th scope="col">Employee</th>
 							<th scope="col">Car ID</th>
 							<th scope="col">Customer</th>
 							<th scope="col">Date</th>
 						</tr>
 					</thead>
 					<tbody>
+						{{#each transactions}}
 						<tr>
-							<th scope="row">1</th>
-							<td>Honda Corvallis</td>
-							<td>Sarah Johnson</td>
-							<td>1</td>
-							<td>Joe Mama</td>
-							<td>11/09/2020</td>
-							<td><button type="button" class="btn btn-secondary">Edit</button></td>
-							<td><button type="button" class="btn btn-danger">Delete</button></td>
+							<th scope="row">{{id}}</th>
+							<td>{{dealership_ID}}</td>
+							<td>{{car_ID}}</td>
+							<td>{{customer_ID}}</td>
+							<td>{{date}}</td>
+							<td><a class="btn btn-secondary" href="/transactions/{{id}}" role="button">Edit</a></td>
 						</tr>
+						{{/each}}
 					</tbody>
 				</table>
 	    </div>

@@ -34,18 +34,18 @@
 	  <div class="row">
 	    <div class="col-sm">
 			<h3>Add Dealership</h3>
-			<form>
+			<form id="addDealership" action="/dealerships" method="post">
 			  <div class="form-group">
 				<label for="dName">Dealership Name:</label>
-				<input type="text" class="form-control" id="dName">
+				<input type="text" class="form-control" name="name">
 			  </div>
 			  <div class="form-group">
 				<label for="dPhone">Dealership Phone Number:</label>
-				<input type="text" class="form-control" id="dPhone">
+				<input type="text" class="form-control" name="phoneNum">
 			  </div>
 			  <div class="form-group">
-				<label for="did">Dealership ID:</label>
-				<input type="text" class="form-control" id="did">
+				<label for="did">Dealership Car Stock:</label>
+				<input type="text" class="form-control" name="carStock">
 			  </div>
 			  <button type="submit" class="btn btn-primary">Submit</button>
 			</form>
@@ -58,16 +58,20 @@
 							<th scope="col">ID</th>
 							<th scope="col">Name</th>
 							<th scope="col">Phone Number</th>
+							<th scope="col">Stock</th>
 						</tr>
 					</thead>
 					<tbody>
+						{{#each dealerships}}
 						<tr>
-							<th scope="row">52096</th>
-							<td>Honda Corvallis</td>
-							<td>541-752-2150</td>
-							<td><button type="button" class="btn btn-secondary">Edit</button></td>
-							<td><button type="button" class="btn btn-danger">Delete</button></td>
+							<th scope="row">{{id}}</th>
+							<td>{{name}}</td>
+							<td>{{phoneNum}}</td>
+							<td>{{carStock}}</td>
+							<td><a class="btn btn-secondary" href="/dealerships/{{id}}">Edit</button></td>
+							<td><button type="button" class="btn btn-danger" onClick="deleteDealership({{id}})">Delete</button></td>
 						</tr>
+						{{/each}}
 					</tbody>
 				</table>
 	    </div>

@@ -27,7 +27,6 @@
 </ul>
 <br>
 <p class="text-center">This is the page where you can view the cars in the database along with relevant information</p>
-
 <div class="container">
   <div class="row justify-content-md-center">
 		<div class="col-md-auto">
@@ -52,32 +51,28 @@
 	  <div class="row">
 	    <div class="col-sm">
 			<h3>Add Cars</h3>
-			<form>
-			  <div class="form-group">
-				<label for="cid">Car ID:</label>
-				<input type="text" class="form-control" id="cid">
-			  </div>
+			<form id='addCar' action='/cars' method='post'>
 			  <div class="form-group">
 				<label for="cMake">Make:</label>
-				<input type="text" class="form-control" id="cMake">
+				<input type="text" class="form-control" name="cMake">
 			  </div>
 			  <div class="form-group">
 				<label for="cModel">Model:</label>
-				<input type="text" class="form-control" id="cModel">
+				<input type="text" class="form-control" name="cModel">
 			  </div>
 			  <div class="form-group">
 				<label for="cYear">Year:</label>
-				<input type="text" class="form-control" id="cYear">
+				<input type="text" class="form-control" name="cYear">
 			  </div>
 			  <div class="form-group">
 				<label for="cPrice">Price:</label>
-				<input type="text" class="form-control" id="cPrice">
+				<input type="text" class="form-control" name="cPrice">
 			  </div>
 			  <div class="form-group">
 				<label for="did">Dealership ID:</label>
-				<input type="text" class="form-control" id="did">
+				<input type="text" class="form-control" name="did">
 			  </div>
-			  <button type="submit" class="btn btn-primary">Submit</button>
+			  <input class="btn btn-primary" type="submit" value="Submit">
 			</form>
 	    </div>
 	    <div class="col-lg-auto">
@@ -90,25 +85,24 @@
 				      <th scope="col">Model</th>
 				      <th scope="col">Year</th>
 							<th scope="col">Price</th>
-							<th scope="col">Dealership</th>
 				    </tr>
 				  </thead>
 				  <tbody>
-				    <tr>
-				      <th scope="row">1</th>
-				      <td>Honda</td>
-				      <td>Civic</td>
-				      <td>2020</td>
-							<td>$20000</td>
-							<td>Honda Corvallis</td>
-							<td><button type="button" class="btn btn-secondary">Edit</button></td>
-							<td><button type="button" class="btn btn-danger">Delete</button></td>
-				    </tr>
+							{{#each cars}}
+							</tr>
+					      <th scope="row">{{id}}</th>
+					     	<td>{{make}}</td>
+					      <td>{{model}}</td>
+					      <td>{{year}}</td>
+								<td>{{price}}</td>
+								<td><a class="btn btn-secondary" href="/cars/{{id}}" role="button">Edit</a></td>
+								<td><button type="button" class="btn btn-danger" onclick="deleteCar({{id}})">Delete</button></td>
+					    </tr>
+							{{/each}}
 				  </tbody>
 				</table>
 	    </div>
 	    <div class="col-sm">
-
 	    </div>
 	  </div>
 	</div>
