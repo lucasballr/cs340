@@ -36,14 +36,10 @@ This is the customer page
 	  <div class="row">
 	    <div class="col-sm">
 			<h3>Add Customer</h3>
-			<form>
+			<form id="addCustomer" action="/customers" method="post">
 			  <div class="form-group">
 				<label for="did">Dealership ID:</label>
 				<input type="text" class="form-control" name="dealership_ID">
-			  </div>
-			  <div class="form-group">
-				<label for="tid">Transaction ID:</label>
-				<input type="text" class="form-control" name="transaction_ID">
 			  </div>
 			  <div class="form-group">
 				<label for="fName">First Name:</label>
@@ -72,10 +68,8 @@ This is the customer page
 							<th scope="row">{{id}}</th>
 							<td>{{fName}}</td>
 							<td>{{lName}}</td>
-							<td><button type="button" class="btn btn-secondary">Edit</button></td>
-							<div id="deleteButton">
-								<td><button type="button" class="btn btn-danger" id="{{id}}">Delete</button></td>
-							</div>
+							<td><a class="btn btn-secondary" href="/customers/{{id}}" role="button">Edit</a></td>
+							<td><button type="button" class="btn btn-danger" onClick="deleteCustomer({{id}})">Delete</button></td>
 						</tr>
 						{{/each}}
 					</tbody>
@@ -87,13 +81,3 @@ This is the customer page
 	  </div>
 	</div>
 </div>
-<script>
-var wrapper = document.getElementById('deleteButton');
-wrapper.addEventListener('click', (event) => {
-	var isButton = event.target.nodeName === 'BUTTON';
-	if (!isButton) {
-		return;
-	}
-	console.log(event.target.id);
-});
-</script>

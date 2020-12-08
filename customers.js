@@ -14,7 +14,7 @@ module.exports = function(){
   };
 
   function getCustomer(res, mysql, context, id, complete){
-    var sql = 'SELECT id, fname, lname FROM customers WHERE id = '+ id;
+    var sql = 'SELECT id, fName, lName FROM customers WHERE id = '+ id;
     mysql.pool.query(sql, function(err, results, fields){
       if (err){
         res.write(JSON.stringify(err));
@@ -48,7 +48,7 @@ module.exports = function(){
 router.put('/:id', function(req, res){
   var mysql = req.app.get('mysql');
   var sql = "UPDATE customers SET fName=?, lName=? WHERE id=?";
-  var insert= [req.body.fname, req.body.lname, req.params.id];
+  var insert= [req.body.fName, req.body.lName, req.params.id];
   sql = mysql.pool.query(sql, insert, function(err, results, fields){
     if (err){
       res.write(JSON.stringify(err));
