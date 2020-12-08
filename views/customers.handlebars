@@ -60,6 +60,7 @@ This is the customer page
 							<th scope="col">ID</th>
 							<th scope="col">First Name</th>
 							<th scope="col">Last Name</th>
+							<th scope="col">Dealership</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -68,6 +69,7 @@ This is the customer page
 							<th scope="row">{{id}}</th>
 							<td>{{fName}}</td>
 							<td>{{lName}}</td>
+							<td>{{name}}</td>
 							<td><a class="btn btn-secondary" href="/customers/{{id}}" role="button">Edit</a></td>
 							<td><button type="button" class="btn btn-danger" onClick="deleteCustomer({{id}})">Delete</button></td>
 						</tr>

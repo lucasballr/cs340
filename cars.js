@@ -5,8 +5,8 @@ module.exports = function(){
   function getCars(res, mysql, context, complete){
     mysql.pool.query('SELECT cars.id, make, model, year, price, dealerships.name FROM cars LEFT JOIN dealership_cars ON cars.id = dealership_cars.cid LEFT JOIN dealerships ON dealership_cars.did = dealerships.id', function(err, results, fields){
       if(err){
-        next(err);
-        return;
+        res.write(JSON.stringify(err));
+        res.end();
       }
       context.cars = results;
       complete();
@@ -17,13 +17,24 @@ module.exports = function(){
     var sql = 'SELECT cars.id, make, model, year, price, dealerships.id as dealership_ID FROM cars LEFT JOIN dealership_cars ON cars.id = dealership_cars.cid LEFT JOIN dealerships ON dealership_cars.did = dealerships.id WHERE cars.id = '+ id;
     mysql.pool.query(sql, function(err, results, fields){
       if (err){
-        next(err);
-        return;
+        res.write(JSON.stringify(err));
+        res.end();
       }
       context.car = results[0];
       complete();
     });
   }
+
+  function getCarSearch(res, mysql, context, make, complete){
+    mysql.pool.query('SELECT cars.id, make, model, year, price, dealerships.name FROM cars LEFT JOIN dealership_cars ON cars.id = dealership_cars.cid LEFT JOIN dealerships ON dealership_cars.did = dealerships.id WHERE cars.make LIKE "'+ make + '"', function(err, results, fields){
+      if(err){
+        res.write(JSON.stringify(err));
+        res.end();
+      }
+      context.cars = results;
+      complete();
+    });
+  };
 
   router.get('/', function(req, res){
     var mysql = req.app.get('mysql');
@@ -43,6 +54,16 @@ module.exports = function(){
     function complete(){
       res.render('update_car', context);
     }
+  });
+
+router.post('/search', function(req, res){
+      var mysql = req.app.get('mysql');
+      context = {};
+      context.jsscripts = ["deleteCar.js"];
+      getCarSearch(res, mysql, context, req.body.iMake, complete);
+      function complete(){
+        res.render('cars', context);
+      }
   });
 
 router.put('/:id', function(req, res){
@@ -69,28 +90,24 @@ router.put('/:id', function(req, res){
 });
 
   router.post('/', function(req, res){
-    var result = {}
     var mysql = req.app.get('mysql');
     var sql = "INSERT INTO cars (make, model, year, price) VALUES ('" + req.body.cMake +"','"+ req.body.cModel +"','"+ req.body.cYear +"','"+ req.body.cPrice + "')";
-    sql = mysql.pool.query(sql, function(err, results, fields){
-      if (err){
-        res.write(JSON.stringify(err));
-        res.status(400);
-        res.end();
-      }
-      result.id = results.insertId
-    });
-
-
-
-    sql = "INSERT INTO dealership_cars (cid, did) VALUES ('" + result.id +"','"+ req.body.dealership_ID + "')";
-    sql = mysql.pool.query(sql, function(err, results, fields){
+    mysql.pool.query(sql, function(err, results, fields){
       if (err){
         res.write(JSON.stringify(err));
         res.status(400);
         res.end();
       } else {
-        res.redirect('/cars');
+        sql = "INSERT INTO dealership_cars (cid, did) VALUES ('" + results.insertId +"','"+ req.body.dealership_ID + "')";
+        mysql.pool.query(sql, function(err, results, fields){
+          if (err){
+            res.write(JSON.stringify(err));
+            res.status(400);
+            res.end();
+          } else {
+            res.redirect('/cars');
+          }
+        });
       }
     });
 

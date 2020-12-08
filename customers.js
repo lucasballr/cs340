@@ -3,7 +3,7 @@ module.exports = function(){
   var router = express.Router();
 
   function getCustomers(res, mysql, context, complete){
-    mysql.pool.query('SELECT * FROM customers', function(err, results, fields){
+    mysql.pool.query('SELECT customers.id, lName, fName, dealerships.name FROM customers LEFT JOIN customer_dealerships ON customers.id = customer_dealerships.cuid LEFT JOIN dealerships ON customer_dealerships.did = dealerships.id', function(err, results, fields){
       if(err){
         res.write(JSON.stringify(err));
         res.end();
@@ -14,7 +14,7 @@ module.exports = function(){
   };
 
   function getCustomer(res, mysql, context, id, complete){
-    var sql = 'SELECT id, fName, lName FROM customers WHERE id = '+ id;
+    var sql = 'SELECT customers.id, fName, lName, dealerships.id as dealership_ID FROM customers LEFT JOIN customer_dealerships ON customers.id = customer_dealerships.cuid LEFT JOIN dealerships ON customer_dealerships.did = dealerships.id WHERE customers.id = '+ id;
     mysql.pool.query(sql, function(err, results, fields){
       if (err){
         res.write(JSON.stringify(err));
@@ -34,6 +34,7 @@ module.exports = function(){
       res.render('customers', context);
     }
   });
+
 
   router.get('/:id', function(req, res){
     var context = {};
@@ -58,6 +59,17 @@ router.put('/:id', function(req, res){
       res.end();
     }
   });
+  sql = "UPDATE customer_dealerships SET cuid=?, did=? WHERE cuid=?";
+  insert= [req.params.id, req.body.dealership_ID, req.params.id];
+  sql = mysql.pool.query(sql, insert, function(err, results, fields){
+    if (err){
+      res.write(JSON.stringify(err));
+      res.end();
+    } else {
+      res.status(200);
+      res.end();
+    }
+  });
 });
 
   router.post('/', function(req, res){
@@ -69,7 +81,16 @@ router.put('/:id', function(req, res){
         res.status(400);
         res.end();
       } else {
-        res.redirect('/customers');
+        sql = "INSERT INTO customer_dealerships (cuid, did) VALUES ('" + results.insertId +"','"+ req.body.dealership_ID + "')";
+        mysql.pool.query(sql, function(err, results, fields){
+          if (err){
+            res.write(JSON.stringify(err));
+            res.status(400);
+            res.end();
+          } else {
+            res.redirect('/customers');
+          }
+        });
       }
     });
   });

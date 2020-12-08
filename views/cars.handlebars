@@ -30,12 +30,12 @@
 <div class="container">
   <div class="row justify-content-md-center">
 		<div class="col-md-auto">
-			<form>
+			<form id='searchCar' action='/cars/search' method='post'>
 				<div class="form-row align-items-center">
 					<h3>Search cars by manufacturer: </h3>
 					<div class="col-auto">
 						<label class="sr-only" for="search">search</label>
-						<input type="text" class="form-control" id="iMake" placeholder="Honda">
+						<input type="text" class="form-control" name="iMake" placeholder="Honda">
 					</div>
 					<div class="col-auto">
 						<button type="submit" class="btn btn-primary mb-2">Search</button>
