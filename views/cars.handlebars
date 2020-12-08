@@ -68,9 +68,9 @@
 				<label for="cPrice">Price:</label>
 				<input type="text" class="form-control" name="cPrice">
 			  </div>
-			  <div class="form-group">
-				<label for="did">Dealership ID:</label>
-				<input type="text" class="form-control" name="did">
+				<div class="form-group">
+				<label for="dealership_ID">Dealership ID:</label>
+				<input type="text" class="form-control" name="dealership_ID">
 			  </div>
 			  <input class="btn btn-primary" type="submit" value="Submit">
 			</form>
@@ -85,6 +85,7 @@
 				      <th scope="col">Model</th>
 				      <th scope="col">Year</th>
 							<th scope="col">Price</th>
+							<th scope="col">Dealership</th>
 				    </tr>
 				  </thead>
 				  <tbody>
@@ -95,6 +96,7 @@
 					      <td>{{model}}</td>
 					      <td>{{year}}</td>
 								<td>{{price}}</td>
+								<td>{{name}}</td>
 								<td><a class="btn btn-secondary" href="/cars/{{id}}" role="button">Edit</a></td>
 								<td><button type="button" class="btn btn-danger" onclick="deleteCar({{id}})">Delete</button></td>
 					    </tr>

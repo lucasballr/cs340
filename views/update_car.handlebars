@@ -35,6 +35,10 @@
 		<h3>Update Car</h3>
 		<form id='update-car' action='/cars' method='post'>
 			<div class="form-group">
+			<label for="cMake">Car ID:</label>
+			<input type="hidden" class="form-control" name="id" value="{{car.id}}">
+			</div>
+			<div class="form-group">
 			<label for="cMake">Make:</label>
 			<input type="text" class="form-control" name="make" value="{{car.make}}">
 			</div>
@@ -49,6 +53,10 @@
 			<div class="form-group">
 			<label for="cPrice">Price:</label>
 			<input type="text" class="form-control" name="price" value="{{car.price}}">
+			</div>
+			<div class="form-group">
+			<label for="cPrice">Dealership ID:</label>
+			<input type="text" class="form-control" name="dealership_ID" value="{{car.dealership_ID}}">
 			</div>
 		</form>
 		<button type="button" class="btn btn-danger" onclick="updateCar({{car.id}})">Save</button>

@@ -3,10 +3,10 @@ module.exports = function(){
   var router = express.Router();
 
   function getTransactions(res, mysql, context, complete){
-    mysql.pool.query('SELECT * FROM transactions', function(err, results, fields){
+    mysql.pool.query('SELECT transactions.id, name, car_ID, fName, date FROM transactions LEFT JOIN dealerships ON transactions.dealership_ID = dealerships.id LEFT JOIN customers ON customers.id = transactions.customer_ID', function(err, results, fields){
       if(err){
-        next(err);
-        return;
+        res.write(JSON.stringify(err));
+        res.end();
       }
       context.transactions = results;
       complete();
@@ -17,8 +17,8 @@ module.exports = function(){
     var sql = 'SELECT id, dealership_ID, car_ID, customer_ID, date FROM transactions WHERE id = '+ id;
     mysql.pool.query(sql, function(err, results, fields){
       if (err){
-        next(err);
-        return;
+        res.write(JSON.stringify(err));
+        res.end();
       }
       context.transaction = results[0];
       complete();

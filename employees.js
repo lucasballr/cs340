@@ -3,7 +3,7 @@ module.exports = function(){
   var router = express.Router();
 
   function getEmployees(res, mysql, context, complete){
-    mysql.pool.query('SELECT * FROM employees', function(err, results, fields){
+    mysql.pool.query('SELECT employees.id, fName, lName, type, name FROM employees LEFT JOIN dealerships ON employees.dealership_ID = dealerships.id', function(err, results, fields){
       if(err){
         res.write(JSON.stringify(err));
         res.end();
@@ -14,7 +14,7 @@ module.exports = function(){
   };
 
   function getEmployee(res, mysql, context, id, complete){
-    var sql = 'SELECT id, fname, lname, dealership_ID, type FROM employees WHERE id = '+ id;
+    var sql = 'SELECT * FROM employees WHERE id = '+ id;
     mysql.pool.query(sql, function(err, results, fields){
       if (err){
         res.write(JSON.stringify(err));
